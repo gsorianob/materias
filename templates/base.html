@@ -1,0 +1,32 @@
+{% load admin_static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>{% block title %}Materias{% endblock %}</title>
+    {% block blockbots %}<meta name="robots" content="NONE,NOARCHIVE" />{% endblock %}
+
+    <link rel="stylesheet" type="text/css" href="/static/bootstrap/dist/css/bootstrap.css" />
+    <script src="/static/bootstrap/assets/js/jquery.js"></script>
+    <script src="/static/bootstrap/dist/js/bootstrap.js"></script>
+    <link rel="stylesheet" type="text/css" href="/static/css/menu.css" />
+    <link rel="stylesheet" type="text/css" href="/static/css/footer.css" />
+
+    {% block extrastyle %}{% endblock %}
+</head>
+<body>
+
+<div class="container">
+
+    {% block menu %}
+        {% include "menu.html" %}
+    {% endblock %}
+
+    {% block content %}{% endblock %}
+
+    {% include "footer.html" %}
+</div>
+{% block footerhtml %}{% endblock %}
+</body>
+</html>
+
