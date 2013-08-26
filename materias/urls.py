@@ -6,7 +6,8 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     url(r'^$', 'home.views.index'),
-    url(r'^home/', include('home.urls')),
+    url(r'^home/', include('home.urls', app_name="home")),
+    url(r'^calendario/', include('calendario.urls', app_name="calendario")),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
