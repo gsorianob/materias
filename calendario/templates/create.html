@@ -1,1 +1,95 @@
 {% extends "base.html" %}
+
+{% block container %}
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+    <script>
+        $(function() {
+            $( "#catalog" ).accordion();
+            $( "#catalog li" ).draggable({
+                appendTo: "body",
+                helper: "clone"
+            });
+            $( ".cart ul" ).droppable({
+                activeClass: "ui-state-default",
+                hoverClass: "ui-state-hover",
+                accept: ":not(.ui-sortable-helper)",
+                drop: function( event, ui ) {
+                    $( this ).find( ".placeholder" ).remove();
+                    $( "<li></li>" ).text( ui.draggable.text() ).appendTo( this );
+                }
+            }).sortable({
+                        items: "li:not(.placeholder)",
+                        sort: function() {
+                            // gets added unintentionally by droppable interacting with sortable
+                            // using connectWithSortable fixes this, but doesn't allow you to customize active/hoverClass options
+                            $( this ).removeClass( "ui-state-default" );
+                        }
+                    });
+        });
+    </script>
+    <h1>Clases</h1>
+    <div class="row">
+        <div class="col-lg-8">
+            <table width="100%">
+                {% for a in semanas %}
+                    <tr>
+                        {% for a in clases %}
+                            <td width="50%">
+                                <div class="cart">
+                                    <div class="ui-widget-content">
+                                        <ul>
+                                            <li class="placeholder"></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <div class="col-lg-4">
+            <div id="products">
+                <div id="catalog">
+                    <h2><a href="#">Materia</a></h2>
+                    <div>
+                        <ul>
+                            <li>Introducción a Programación Estructurada.</li>
+                            <li>Algoritmos y pseudocódigo.</li>
+                            <li>Estructuras de control</li>
+                            <li>Ejercitación</li>
+                            <li>Introducción al lenguaje PASCAL</li>
+                            <li>Estructuras secuenciales, alternativas y repetitivas</li>
+                            <li>Procedimientos y funciones</li>
+                            <li>Estructuras homogéneas. Arreglos lineales Arreglos Multidimensionales.</li>
+                            <li>Técnicas de debugging</li>
+                            <li>Métodos de ordenamiento en vectores Burbujeo, Selección e Inserción</li>
+                            <li>Laboratorio</li>
+                            <li>Estructuras heterogéneas. Registros y tablas.</li>
+                            <li>Métodos de búsqueda en vectores</li>
+                        </ul>
+                    </div>
+                    <h2><a href="#">Generales</a></h2>
+                    <div>
+                        <ul>
+                            <li>Feriado</li>
+                            <li>Parcial</li>
+                            <li>Recuperatorio</li>
+                            <li>Coloquio</li>
+                        </ul>
+                    </div>
+                    <h2><a href="#">TPs</a></h2>
+                    <div>
+                        <ul>
+                            <li>Entrega del enunciado</li>
+                            <li>Entrega del TP</li>
+                            <li>Defensa del TP</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a href="/calendario/" class="btn">Volver</a>
+{% endblock %}

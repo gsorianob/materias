@@ -9,6 +9,7 @@
     <link rel="stylesheet" type="text/css" href="/static/bootstrap/dist/css/bootstrap.css" />
     <script src="/static/bootstrap/assets/js/jquery.js"></script>
     <script src="/static/bootstrap/dist/js/bootstrap.js"></script>
+    <link rel="stylesheet" type="text/css" href="/static/css/base.css" />
     <link rel="stylesheet" type="text/css" href="/static/css/menu.css" />
     <link rel="stylesheet" type="text/css" href="/static/css/footer.css" />
 
@@ -16,17 +17,21 @@
 </head>
 <body>
 
-<div class="container">
-
     {% block menu %}
         {% include "menu.html" %}
     {% endblock %}
 
-    {% block content %}{% endblock %}
+    <div class="content">
+        {% block content %}
+            <div class="container">
+                {% block container %}{% endblock %}
+            </div>
+        {% endblock %}
+    </div>
 
     {% include "footer.html" %}
-</div>
-{% block footerhtml %}{% endblock %}
+
+    {% block footerhtml %}{% endblock %}
 </body>
 </html>
 
