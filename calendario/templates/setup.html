@@ -1,9 +1,13 @@
 {% extends "base.html" %}
 
 {% block container %}
+
+    <script src="/static/js/datepicker.js"></script>
+
     <form id="form" action="/calendario/create/" method="post">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit" class="btn">Enviar</button>
     </form>
+
 {% endblock %}
