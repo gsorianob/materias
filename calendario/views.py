@@ -9,16 +9,11 @@ from calendario.forms import SetupForm
 
 
 # @login_required
-def setup(request):
-    form = SetupForm(initial={'semanas': 16, 'fecha_de_inicio': datetime.today()})
-    c = {'form': form}
-    c.update(csrf(request))
-    return render_to_response('setup.html', c)
-
-
-def agregar_dia_si_es_verdadero(lista, numero_de_dia, agregar):
-    if agregar:
-        lista.append(numero_de_dia)
+# def setup(request):
+#     form = SetupForm(initial={'semanas': 16, 'fecha_de_inicio': datetime.today()})
+#     c = {'form': form}
+#     c.update(csrf(request))
+#     return render_to_response('setup.html', c)
 
 
 def agrupar_clases_por_semana(clases, cantidad):
@@ -38,12 +33,13 @@ def create(request):
             lunes_de_esa_semana = fecha_de_inicio + timedelta(days=-fecha_de_inicio.weekday())
 
             dias_de_clase = []
-            agregar_dia_si_es_verdadero(dias_de_clase, 0, form.cleaned_data['lunes'])
-            agregar_dia_si_es_verdadero(dias_de_clase, 1, form.cleaned_data['martes'])
-            agregar_dia_si_es_verdadero(dias_de_clase, 2, form.cleaned_data['miercoles'])
-            agregar_dia_si_es_verdadero(dias_de_clase, 3, form.cleaned_data['jueves'])
-            agregar_dia_si_es_verdadero(dias_de_clase, 4, form.cleaned_data['viernes'])
-            agregar_dia_si_es_verdadero(dias_de_clase, 5, form.cleaned_data['sabado'])
+            # agrego los días de clase si los tildaron en el form.
+            form.cleaned_data['lunes'] and dias_de_clase.append(0)
+            form.cleaned_data['martes'] and dias_de_clase.append(1)
+            form.cleaned_data['miercoles'] and dias_de_clase.append(2)
+            form.cleaned_data['jueves'] and dias_de_clase.append(3)
+            form.cleaned_data['viernes'] and dias_de_clase.append(4)
+            form.cleaned_data['sabado'] and dias_de_clase.append(5)
 
             clases = (lunes_de_esa_semana + timedelta(s*7+d) for s in xrange(semanas) for d in dias_de_clase)
             clases_por_semana = len(dias_de_clase)

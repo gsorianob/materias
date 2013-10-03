@@ -1,96 +1,34 @@
 {% extends "base.html" %}
 
 {% block container %}
-    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
     <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+    <link rel="stylesheet" href="/resources/demos/style.css" />
+    <style>
+        #sortable1, #sortable2 { list-style-type: none; margin: 0; padding: 0 0 2.5em; float: left; margin-right: 10px; }
+        #sortable1 li, #sortable2 li { margin: 0 5px 5px 5px; padding: 5px; font-size: 1.2em; width: 120px; }
+    </style>
     <script>
         $(function() {
-            $( "#catalog" ).accordion();
-            $( "#catalog li" ).draggable({
-                appendTo: "body",
-                helper: "clone"
-            });
-            $( ".cart ul" ).droppable({
-                activeClass: "ui-state-default",
-                hoverClass: "ui-state-hover",
-                accept: ":not(.ui-sortable-helper)",
-                drop: function( event, ui ) {
-                    $( this ).find( ".placeholder" ).remove();
-                    $( "<li></li>" ).text( ui.draggable.text() ).appendTo( this );
-                }
-            }).sortable({
-                        items: "li:not(.placeholder)",
-                        sort: function() {
-                            // gets added unintentionally by droppable interacting with sortable
-                            // using connectWithSortable fixes this, but doesn't allow you to customize active/hoverClass options
-                            $( this ).removeClass( "ui-state-default" );
-                        }
-                    });
+            $( "#sortable1, #sortable2" ).sortable({
+                connectWith: ".connectedSortable"
+            }).disableSelection();
         });
     </script>
     <h1>Clases</h1>
-    <div class="row">
-        <div class="col-lg-8">
-            <table width="100%">
-                {% for clases_de_una_semana in clases %}
-                    <tr>
-                        {% for clase in clases_de_una_semana %}
-                            <td>
-                                <div class="cart">
-                                    <div class="ui-widget-content">
-                                        {{ clase | date:"l d-m-Y" }}
-                                        <ul>
-                                            <li class="placeholder"></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </td>
-                        {% endfor %}
-                    </tr>
-                {% endfor %}
-            </table>
-        </div>
-        <div class="col-lg-4">
-            <div id="products">
-                <div id="catalog">
-                    <h2><a href="#">Materia</a></h2>
-                    <div>
-                        <ul>
-                            <li>Introducción a Programación Estructurada.</li>
-                            <li>Algoritmos y pseudocódigo.</li>
-                            <li>Estructuras de control</li>
-                            <li>Ejercitación</li>
-                            <li>Introducción al lenguaje PASCAL</li>
-                            <li>Estructuras secuenciales, alternativas y repetitivas</li>
-                            <li>Procedimientos y funciones</li>
-                            <li>Estructuras homogéneas. Arreglos lineales Arreglos Multidimensionales.</li>
-                            <li>Técnicas de debugging</li>
-                            <li>Métodos de ordenamiento en vectores Burbujeo, Selección e Inserción</li>
-                            <li>Laboratorio</li>
-                            <li>Estructuras heterogéneas. Registros y tablas.</li>
-                            <li>Métodos de búsqueda en vectores</li>
-                        </ul>
-                    </div>
-                    <h2><a href="#">Generales</a></h2>
-                    <div>
-                        <ul>
-                            <li>Feriado</li>
-                            <li>Parcial</li>
-                            <li>Recuperatorio</li>
-                            <li>Coloquio</li>
-                        </ul>
-                    </div>
-                    <h2><a href="#">TPs</a></h2>
-                    <div>
-                        <ul>
-                            <li>Entrega del enunciado</li>
-                            <li>Entrega del TP</li>
-                            <li>Defensa del TP</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <a href="/calendario/" class="btn">Volver</a>
+    <ul id="sortable1" class="connectedSortable">
+        <li class="ui-state-default">Item 1</li>
+        <li class="ui-state-default">Item 2</li>
+        <li class="ui-state-default">Item 3</li>
+        <li class="ui-state-default">Item 4</li>
+        <li class="ui-state-default">Item 5</li>
+    </ul>
+
+    <ul id="sortable2" class="connectedSortable">
+        <li class="ui-state-highlight">Item 1</li>
+        <li class="ui-state-highlight">Item 2</li>
+        <li class="ui-state-highlight">Item 3</li>
+        <li class="ui-state-highlight">Item 4</li>
+        <li class="ui-state-highlight">Item 5</li>
+    </ul>    <a href="/calendario/" class="btn">Volver</a>
 {% endblock %}

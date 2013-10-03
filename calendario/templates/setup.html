@@ -1,13 +1,38 @@
 {% extends "base.html" %}
+{% load i18n %}
+
+{% block extrastyle %}
+    <link href='/static/fullcalendar-1.6.4/fullcalendar/fullcalendar.css' rel='stylesheet' />
+    <link href='/static/fullcalendar-1.6.4/fullcalendar/fullcalendar.print.css' rel='stylesheet' media='print' />
+    <script src='/static/fullcalendar-1.6.4/lib/jquery-ui.custom.min.js'></script>
+    <script src='/static/fullcalendar-1.6.4/fullcalendar/fullcalendar.min.js'></script>
+
+    <script src='/static/js/calendar.js'></script>
+
+    <link href='/static/css/calendar.css' rel='stylesheet' />
+{% endblock %}
 
 {% block container %}
 
-    <script src="/static/js/datepicker.js"></script>
+    <div id='wrap'>
 
-    <form id="form" action="/calendario/create/" method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="btn">Enviar</button>
-    </form>
+        <div id='external-events'>
+            <h4>Draggable Events</h4>
+            <div class='external-event'>My Event 1</div>
+            <div class='external-event'>My Event 2</div>
+            <div class='external-event'>My Event 3</div>
+            <div class='external-event'>My Event 4</div>
+            <div class='external-event'>My Event 5</div>
+            <p>
+                <input type='checkbox' id='drop-remove' /> <label for='drop-remove'>remove after drop</label>
+            </p>
+        </div>
+
+        <div id='calendar'></div>
+
+        <div style='clear:both'></div>
+
+        <a class="btn btn-default" href="#">{% trans "Send" %} »</a>
+    </div>
 
 {% endblock %}

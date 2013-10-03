@@ -1,9 +1,10 @@
 {% load admin_static %}
+{% load i18n %}
 <!DOCTYPE html>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>{% block title %}Materias{% endblock %}</title>
+    <title>{% block title %}{% trans "Subjects" %}{% endblock %}</title>
     {% block blockbots %}<meta name="robots" content="NONE,NOARCHIVE" />{% endblock %}
 
     <link rel="stylesheet" type="text/css" href="/static/bootstrap/dist/css/bootstrap.css" />
@@ -13,8 +14,8 @@
     <link rel="stylesheet" type="text/css" href="/static/css/menu.css" />
     <link rel="stylesheet" type="text/css" href="/static/css/footer.css" />
 
-    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
-    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+{#    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />#}
+{#    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>#}
 
     {% block extrastyle %}{% endblock %}
 </head>
