@@ -21,16 +21,24 @@
 </head>
 <body>
 
-    {% block menu %}
-        {% include "menu.html" %}
-    {% endblock %}
-
-    <div class="content">
-        {% block content %}
-            <div class="container">
-                {% block container %}{% endblock %}
+    <div id="wrap">
+        <!-- Begin page content -->
+        <div class="container">
+            <div class="page-header">
+                {% block menu %}
+                    {% include "menu.html" %}
+                {% endblock %}
             </div>
-        {% endblock %}
+            <div class="content">
+                {% block content %}
+                    <div class="container">
+                        {% block container %}{% endblock %}
+                    </div>
+                {% endblock %}
+            </div>
+        </div>
+
+        <div id="push"></div>
     </div>
 
     {% include "footer.html" %}
